@@ -1,0 +1,1650 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Counter-Strike: Global Offensive | 27 Years of Tactical Excellence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Russo+One&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    /* ─── RESET & BASE ─── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg-deep:   #e8ebf0;
+      --bg-dark:   #ffffff;
+      --bg-card:   #f5f6f9;
+      --bg-card2:  #eaecf1;
+      --orange:    #d45d00;
+      --orange-lt: #e86800;
+      --gold:      #9a7a2e;
+      --gold-lt:   #b8933e;
+      --white:     #1a1a1a;
+      --muted:     #5a5a5a;
+      --muted-lt:  #888888;
+      --border:    rgba(212,93,0,0.3);
+      --border2:   rgba(154,122,46,0.3);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Rajdhani', sans-serif;
+      background: var(--bg-dark);
+      color: var(--white);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    ::selection { background: var(--orange); color: #fff; }
+
+    /* ─── SCROLLBAR ─── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-card); }
+    ::-webkit-scrollbar-thumb { background: var(--orange); border-radius: 3px; }
+
+    /* ─── UTILITIES ─── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    .section-tag {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: .7rem;
+      letter-spacing: .3em;
+      color: var(--orange);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      margin-bottom: .8rem;
+    }
+    .section-tag::before {
+      content: '';
+      display: inline-block;
+      width: 2rem; height: 2px;
+      background: var(--orange);
+    }
+    .section-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      line-height: 1.1;
+    }
+    .section-title span { color: var(--orange); }
+    .section-desc {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 600px;
+      margin-top: .8rem;
+      text-indent: 2em;
+    }
+
+    /* ─── GRAIN OVERLAY ─── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.025'/%3E%3C/svg%3E");
+      opacity: .35;
+    }
+
+    /* ─── NAVIGATION ─── */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 1.2rem 0;
+      transition: all .3s ease;
+      background: transparent;
+    }
+    #navbar.scrolled {
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(12px);
+      padding: .8rem 0;
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 2px 20px rgba(0,0,0,.06);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'Russo One', sans-serif;
+      font-size: 1.3rem;
+      color: var(--white);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+    .nav-logo .logo-cs {
+      color: var(--orange);
+      font-size: 1.5rem;
+    }
+    .nav-logo .logo-sep {
+      color: var(--muted-lt);
+      font-weight: 300;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'Oswald', sans-serif;
+      font-size: .85rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      position: relative;
+      transition: color .25s;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 2px;
+      background: var(--orange);
+      transition: width .3s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta {
+      font-family: 'Oswald', sans-serif;
+      font-size: .8rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: #fff;
+      background: var(--orange);
+      border: none;
+      padding: .5rem 1.4rem;
+      cursor: pointer;
+      clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+      transition: background .25s, transform .2s;
+    }
+    .nav-cta:hover { background: var(--orange-lt); transform: scaleX(1.04); }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--white);
+      transition: all .3s;
+    }
+
+    /* ─── HERO ─── */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    /* CS.png image background behind text */
+    .hero-img-bg {
+      position: absolute;
+      inset: 0;
+      background: url('CS.png') center/contain no-repeat;
+      background-position: center center;
+      opacity: .48;
+      z-index: 0;
+      filter: brightness(1.05) saturate(0.95);
+    }
+    .hero-img-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.6) 0%, rgba(255,255,255,.25) 40%, rgba(255,255,255,.55) 70%, rgba(255,255,255,.82) 100%);
+    }
+    #canvas-hero {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+      opacity: .5;
+    }
+    .hero-bg-grad {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 50%, rgba(212,93,0,.05) 0%, transparent 70%),
+        linear-gradient(180deg, rgba(255,255,255,.4) 0%, rgba(255,255,255,.85) 100%);
+      pointer-events: none;
+    }
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background-image:
+        linear-gradient(rgba(212,93,0,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212,93,0,.05) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 90% 70% at 50% 50%, black 0%, transparent 100%);
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      text-align: center;
+      padding: 8rem 2rem 6rem;
+    }
+    .hero-content .text-bg-protect {
+      display: inline-block;
+      background: rgba(255,255,255,.55);
+      backdrop-filter: blur(4px);
+      padding: .2rem .8rem;
+      border-radius: 3px;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: .7rem;
+      letter-spacing: .3em;
+      color: var(--orange);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.6);
+      padding: .4rem 1.2rem;
+      margin-bottom: 2rem;
+      text-transform: uppercase;
+      animation: fadeInDown .8s ease both;
+      backdrop-filter: blur(4px);
+    }
+    .hero-badge .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--orange);
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50%      { opacity: .4; transform: scale(.7); }
+    }
+    .hero-title {
+      font-family: 'Russo One', sans-serif;
+      font-size: clamp(2.8rem, 7vw, 7rem);
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      line-height: .95;
+      animation: fadeInUp .9s .1s ease both;
+    }
+    /* Text with light backplate for readability over CS.png */
+    .hero-title .line-wrap {
+      display: inline-block;
+      background: rgba(255,255,255,.78);
+      backdrop-filter: blur(6px);
+      padding: 0 .4rem;
+    }
+    .hero-title .line1 { color: #1a1a1a; }
+    .hero-title .line2 {
+      color: var(--orange);
+      -webkit-text-stroke: 1px var(--orange);
+    }
+    .hero-title .line3 { color: #1a1a1a; }
+    .hero-subtitle {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(1rem, 2vw, 1.5rem);
+      letter-spacing: .2em;
+      color: var(--gold);
+      margin-top: 1.2rem;
+      text-transform: uppercase;
+      animation: fadeInUp .9s .25s ease both;
+      display: inline-block;
+      background: rgba(255,255,255,.6);
+      backdrop-filter: blur(4px);
+      padding: .3rem 1rem;
+    }
+    .hero-quote {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: clamp(.95rem, 1.5vw, 1.15rem);
+      color: var(--muted);
+      margin-top: 1.2rem;
+      font-style: italic;
+      animation: fadeInUp .9s .35s ease both;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 1.2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 3rem;
+      animation: fadeInUp .9s .5s ease both;
+    }
+    .btn-primary {
+      font-family: 'Oswald', sans-serif;
+      font-size: .9rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: #fff;
+      background: var(--orange);
+      border: none;
+      padding: .9rem 2.4rem;
+      cursor: pointer;
+      clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      transition: background .25s, transform .2s, box-shadow .2s;
+    }
+    .btn-primary:hover {
+      background: var(--orange-lt);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(212,93,0,.35);
+    }
+    .btn-outline {
+      font-family: 'Oswald', sans-serif;
+      font-size: .9rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--white);
+      background: rgba(255,255,255,.5);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(0,0,0,.2);
+      padding: .9rem 2.4rem;
+      cursor: pointer;
+      clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      transition: border-color .25s, color .25s, transform .2s;
+    }
+    .btn-outline:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+      transform: translateY(-2px);
+    }
+    .hero-scroll {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .5rem;
+      animation: fadeIn 1s 1s ease both;
+    }
+    .hero-scroll span {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: .65rem;
+      letter-spacing: .25em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+    .scroll-line {
+      width: 1px; height: 50px;
+      background: linear-gradient(to bottom, var(--orange), transparent);
+      animation: scrollDown 1.5s ease-in-out infinite;
+    }
+    @keyframes scrollDown {
+      0%   { transform: scaleY(0); transform-origin: top; }
+      50%  { transform: scaleY(1); transform-origin: top; }
+      51%  { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+
+    /* ─── SECTION COMMON ─── */
+    section { padding: 6rem 0; position: relative; }
+    section:nth-child(even) { background: var(--bg-card); }
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      opacity: .5;
+      margin: 0;
+    }
+
+    /* ─── INTRO ─── */
+    #intro .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      margin-top: 3.5rem;
+    }
+    .intro-text p { color: var(--muted); font-size: 1.05rem; line-height: 1.8; margin-bottom: 1rem; text-indent: 2em; }
+    .intro-text p strong { color: var(--white); font-weight: 600; }
+    .intro-text p span.hl { color: var(--orange); font-weight: 600; }
+    .faction-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .faction {
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      padding: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color .25s, transform .25s, box-shadow .25s;
+    }
+    .faction::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(212,93,0,.04), transparent);
+      opacity: 0;
+      transition: opacity .3s;
+    }
+    .faction:hover { border-color: var(--orange); transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,.08); }
+    .faction:hover::before { opacity: 1; }
+    .faction .fi { font-size: 1.8rem; }
+    .faction .ft {
+      font-family: 'Oswald', sans-serif;
+      font-size: .95rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--orange);
+    }
+    .faction .fd { font-size: .85rem; color: var(--muted); }
+    .modes-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    .mode-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(0,0,0,.07);
+      padding: 1.4rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      transition: border-color .25s, transform .25s, box-shadow .25s;
+      cursor: default;
+    }
+    .mode-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0,0,0,.08);
+    }
+    .mode-icon {
+      width: 42px; height: 42px;
+      background: rgba(212,93,0,.08);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      color: var(--orange);
+      flex-shrink: 0;
+    }
+    .mode-info .mt {
+      font-family: 'Oswald', sans-serif;
+      font-size: .9rem;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: .3rem;
+    }
+    .mode-info .md { font-size: .8rem; color: var(--muted); line-height: 1.4; }
+
+    /* ─── FEATURES ─── */
+    #features { background: var(--bg-deep); }
+    .features-header { text-align: center; margin-bottom: 3.5rem; }
+    .features-header .section-tag { justify-content: center; }
+    .features-header .section-tag::before { display: none; }
+    .features-header .section-desc { margin: .8rem auto 0; text-align: center; }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .feat-card {
+      background: var(--bg-dark);
+      border: 1px solid rgba(0,0,0,.06);
+      border-top: 2px solid transparent;
+      padding: 2rem 1.8rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color .3s, transform .3s, box-shadow .3s;
+      cursor: default;
+    }
+    .feat-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--orange);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .35s;
+    }
+    .feat-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,0,0,.1); }
+    .feat-card:hover::after { transform: scaleX(1); }
+    .feat-card:hover .feat-icon { color: var(--orange); border-color: var(--orange); }
+    .feat-icon {
+      width: 54px; height: 54px;
+      border: 1px solid rgba(0,0,0,.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      color: var(--muted);
+      margin-bottom: 1.2rem;
+      transition: color .3s, border-color .3s;
+    }
+    .feat-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: .6rem;
+    }
+    .feat-desc { font-size: .9rem; color: var(--muted); line-height: 1.6; text-indent: 2em; }
+    .feat-card .feat-corner {
+      position: absolute;
+      bottom: 1rem; right: 1rem;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: .6rem;
+      color: rgba(0,0,0,.06);
+      letter-spacing: .1em;
+    }
+
+    /* ─── TIMELINE ─── */
+    #timeline { background: var(--bg-dark); overflow: hidden; }
+    .timeline-header { text-align: center; margin-bottom: 4rem; }
+    .timeline-header .section-tag { justify-content: center; }
+    .timeline-header .section-tag::before { display: none; }
+    .timeline-wrap {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .timeline-line {
+      position: absolute;
+      left: 50%;
+      top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, transparent, var(--border) 5%, var(--border) 95%, transparent);
+      transform: translateX(-50%);
+    }
+    .tl-item {
+      position: relative;
+      width: 50%;
+      padding: 0 3rem 3.5rem;
+    }
+    .tl-item:nth-child(odd) {
+      left: 0;
+      text-align: right;
+    }
+    .tl-item:nth-child(even) {
+      left: 50%;
+      text-align: left;
+    }
+    .tl-dot {
+      position: absolute;
+      top: .3rem;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--bg-dark);
+      border: 2px solid var(--orange);
+      z-index: 2;
+      transition: background .3s, box-shadow .3s;
+    }
+    .tl-item:nth-child(odd) .tl-dot  { right: -7px; }
+    .tl-item:nth-child(even) .tl-dot { left: -7px; }
+    .tl-item:hover .tl-dot {
+      background: var(--orange);
+      box-shadow: 0 0 12px rgba(212,93,0,.5);
+    }
+    .tl-year {
+      font-family: 'Russo One', sans-serif;
+      font-size: 1.5rem;
+      color: var(--orange);
+      line-height: 1;
+      margin-bottom: .5rem;
+    }
+    .tl-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: .4rem;
+    }
+    .tl-desc { font-size: .85rem; color: var(--muted); line-height: 1.5; text-indent: 2em; }
+    .tl-badge {
+      display: inline-block;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: .62rem;
+      padding: .2rem .6rem;
+      border: 1px solid var(--border2);
+      background: rgba(154,122,46,.06);
+      color: var(--gold);
+      letter-spacing: .1em;
+      margin-top: .5rem;
+    }
+
+    /* ─── ESPORTS ─── */
+    #esports {
+      background: var(--bg-deep);
+      position: relative;
+      overflow: hidden;
+    }
+    #esports::before {
+      content: 'ESPORTS';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      font-family: 'Russo One', sans-serif;
+      font-size: clamp(6rem, 14vw, 16rem);
+      color: rgba(0,0,0,.025);
+      pointer-events: none;
+      white-space: nowrap;
+      letter-spacing: .1em;
+    }
+    .esports-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 4rem;
+      align-items: start;
+      margin-top: 3.5rem;
+    }
+    .esports-stats-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .esport-stat {
+      background: var(--bg-dark);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .esport-stat .sv {
+      font-family: 'Russo One', sans-serif;
+      font-size: 2rem;
+      color: var(--orange);
+      line-height: 1;
+    }
+    .esport-stat .sl { font-size: .78rem; color: var(--muted); margin-top: .3rem; letter-spacing: .05em; text-transform: uppercase; }
+    .legends-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+    }
+    .legends-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border2);
+    }
+    .legend-list { display: flex; flex-direction: column; gap: .8rem; }
+    .legend-card {
+      background: var(--bg-dark);
+      border: 1px solid rgba(0,0,0,.07);
+      border-left: 3px solid transparent;
+      padding: 1rem 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      transition: border-color .25s, transform .2s, box-shadow .2s;
+    }
+    .legend-card:hover { border-left-color: var(--orange); transform: translateX(4px); box-shadow: 0 4px 16px rgba(0,0,0,.06); }
+    .legend-avatar {
+      width: 44px; height: 44px;
+      background: rgba(212,93,0,.1);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Russo One', sans-serif;
+      font-size: 1rem;
+      color: var(--orange);
+      flex-shrink: 0;
+    }
+    .legend-info .ln {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem;
+      letter-spacing: .05em;
+      color: var(--white);
+    }
+    .legend-info .lr { font-size: .8rem; color: var(--muted); }
+    .legend-info .lq {
+      font-size: .82rem;
+      color: var(--gold);
+      font-style: italic;
+      margin-top: .25rem;
+    }
+    .china-glory {
+      background: var(--bg-dark);
+      border: 1px solid var(--border2);
+      border-left: 4px solid var(--gold);
+      padding: 1.5rem;
+      margin-top: 1.5rem;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+    .china-glory .cg-icon { font-size: 2rem; flex-shrink: 0; }
+    .china-glory .cg-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: .95rem;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .3rem;
+    }
+    .china-glory .cg-desc { font-size: .85rem; color: var(--muted); }
+
+    /* ─── STATS ─── */
+    #stats { background: var(--bg-dark); }
+    .stats-header { text-align: center; margin-bottom: 3.5rem; }
+    .stats-header .section-tag { justify-content: center; }
+    .stats-header .section-tag::before { display: none; }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(0,0,0,.07);
+      border-bottom: 3px solid var(--orange);
+      padding: 2.2rem 1.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: transform .3s, box-shadow .3s;
+    }
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 0;
+      background: rgba(212,93,0,.04);
+      transition: height .4s;
+    }
+    .stat-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,.08); }
+    .stat-card:hover::before { height: 100%; }
+    .stat-number {
+      font-family: 'Russo One', sans-serif;
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      color: var(--orange);
+      line-height: 1;
+      position: relative;
+    }
+    .stat-number .suffix {
+      font-size: 50%;
+      color: var(--gold);
+      vertical-align: super;
+    }
+    .stat-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: .85rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: .7rem;
+    }
+    .stat-sub { font-size: .75rem; color: var(--muted-lt); margin-top: .3rem; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--bg-deep);
+      border-top: 1px solid var(--border);
+      padding: 4rem 0 2rem;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(0,0,0,.08);
+    }
+    .footer-brand .fb-logo {
+      font-family: 'Russo One', sans-serif;
+      font-size: 1.4rem;
+      color: var(--white);
+      margin-bottom: .8rem;
+    }
+    .footer-brand .fb-logo span { color: var(--orange); }
+    .footer-brand p { font-size: .88rem; color: var(--muted); line-height: 1.7; text-indent: 2em; }
+    .footer-brand .fb-tagline {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: .7rem;
+      color: var(--gold);
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      margin-top: 1rem;
+      border-left: 2px solid var(--gold);
+      padding-left: .8rem;
+    }
+    .footer-col h4 {
+      font-family: 'Oswald', sans-serif;
+      font-size: .85rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 1.2rem;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .6rem; }
+    .footer-col ul li a {
+      font-size: .85rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .2s;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .footer-col ul li a:hover { color: var(--orange); }
+    .footer-col ul li a::before {
+      content: '\203A';
+      color: var(--orange);
+      font-size: 1rem;
+      font-weight: bold;
+    }
+    .footer-bottom {
+      padding-top: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-copy { font-size: .8rem; color: var(--muted-lt); }
+    .footer-copy a { color: var(--orange); text-decoration: none; }
+    .footer-tribute {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: .72rem;
+      color: var(--gold);
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    /* ─── CROSSHAIR DECO ─── */
+    .crosshair {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9998;
+      width: 20px; height: 20px;
+      opacity: 0;
+      transition: opacity .2s;
+      mix-blend-mode: difference;
+    }
+    .crosshair::before,
+    .crosshair::after {
+      content: '';
+      position: absolute;
+      background: var(--orange);
+      opacity: .7;
+    }
+    .crosshair::before { width: 100%; height: 1px; top: 50%; left: 0; transform: translateY(-50%); }
+    .crosshair::after  { width: 1px; height: 100%; left: 50%; top: 0; transform: translateX(-50%); }
+
+    /* ─── SCROLL REVEAL ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+    .reveal-left  { opacity: 0; transform: translateX(-30px); transition: opacity .65s ease, transform .65s ease; }
+    .reveal-right { opacity: 0; transform: translateX(30px);  transition: opacity .65s ease, transform .65s ease; }
+    .reveal-left.visible, .reveal-right.visible { opacity: 1; transform: none; }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeInUp   { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: none; } }
+    @keyframes fadeInDown { from { opacity:0; transform: translateY(-20px); } to { opacity:1; transform: none; } }
+    @keyframes fadeIn     { from { opacity:0; } to { opacity:1; } }
+
+    /* ─── MOBILE NAV ─── */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 999;
+      background: rgba(255,255,255,.97);
+      backdrop-filter: blur(16px);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--white);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .mobile-menu a:hover { color: var(--orange); }
+    .mobile-close {
+      position: absolute;
+      top: 1.5rem; right: 2rem;
+      background: none;
+      border: none;
+      color: var(--white);
+      font-size: 1.8rem;
+      cursor: pointer;
+      transition: color .2s;
+    }
+    .mobile-close:hover { color: var(--orange); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      #intro .intro-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .features-grid { grid-template-columns: 1fr 1fr; }
+      .timeline-line { left: 20px; }
+      .tl-item { width: 100%; left: 0 !important; padding: 0 1.5rem 2.5rem 3.5rem; text-align: left !important; }
+      .tl-item:nth-child(odd) .tl-dot,
+      .tl-item:nth-child(even) .tl-dot { left: 13px; right: auto; }
+      .esports-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .footer-top .footer-brand { grid-column: 1/-1; }
+    }
+    @media (max-width: 600px) {
+      .features-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .faction-cards { grid-template-columns: 1fr; }
+      .modes-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+      .esports-stats-row { grid-template-columns: 1fr 1fr; }
+      .hero-title { font-size: clamp(2rem, 10vw, 3.5rem); }
+      .hero-subtitle { padding: .2rem .6rem; font-size: .85rem; }
+    }
+
+    /* ─── PROGRESS BAR ─── */
+    #progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--orange), var(--gold));
+      z-index: 9999;
+      transition: width .1s linear;
+      width: 0%;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Progress Bar -->
+<div id="progress-bar"></div>
+
+<!-- Custom Crosshair -->
+<div class="crosshair" id="crosshair"></div>
+
+<!-- Mobile Nav Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose"><i class="fa fa-times"></i></button>
+  <a href="#intro"    onclick="closeMobile()">简介</a>
+  <a href="#features" onclick="closeMobile()">特色</a>
+  <a href="#timeline" onclick="closeMobile()">历史</a>
+  <a href="#esports"  onclick="closeMobile()">电竞</a>
+  <a href="#stats"    onclick="closeMobile()">数据</a>
+</div>
+
+<!-- ══════════ NAVBAR ══════════ -->
+<nav id="navbar">
+  <div class="container nav-inner">
+    <a href="#hero" class="nav-logo">
+      <span class="logo-cs">CS</span><span class="logo-sep">:</span>GO
+    </a>
+    <ul class="nav-links">
+      <li><a href="#intro">简介</a></li>
+      <li><a href="#features">特色</a></li>
+      <li><a href="#timeline">历史</a></li>
+      <li><a href="#esports">电竞</a></li>
+      <li><a href="#stats">数据</a></li>
+    </ul>
+    <button class="nav-cta" onclick="document.getElementById('timeline').scrollIntoView({behavior:'smooth'})">探索历史</button>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ══════════ HERO ══════════ -->
+<section id="hero">
+  <!-- CS.png image as text background -->
+  <div class="hero-img-bg"></div>
+  <canvas id="canvas-hero"></canvas>
+  <div class="hero-bg-grad"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-content container">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      VALVE CORPORATION &nbsp;·&nbsp; 1999 – 2026 &nbsp;·&nbsp; ACTIVE
+    </div>
+
+    <p class="hero-subtitle">27 Years of Tactical Excellence &nbsp;|&nbsp; 1999 – 2026</p>
+    <p class="hero-quote">"感谢每一位投身对局的玩家" — Counter-Strike 27周年贺词</p>
+
+    <div class="hero-btns">
+      <a href="#timeline" class="btn-primary">
+        <i class="fa fa-clock-rotate-left"></i> 探索传奇历史
+      </a>
+      <a href="#features" class="btn-outline">
+        <i class="fa fa-crosshairs"></i> 了解游戏特色
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════ INTRO ══════════ -->
+<section id="intro">
+  <div class="container">
+    <div class="section-tag">// GAME OVERVIEW</div>
+    <h2 class="section-title">什么是 <span>CS:GO</span></h2>
+    <p class="section-desc">硬核战术竞技，27年不败传奇</p>
+
+    <div class="intro-grid">
+      <div class="intro-text reveal-left">
+        <p>
+          <strong>《反恐精英：全球攻势》</strong>（Counter-Strike: Global Offensive，CS:GO）是由
+          <span class="hl">Valve</span> 开发并发行的第一人称射击游戏，
+          CS 系列的第四部主要作品，于 <span class="hl">2012年8月</span> 正式推出。
+        </p>
+        <p>
+          作为全球最具影响力的竞技射击游戏之一，CS:GO继承了经典 CS 系列的硬核玩法精髓，
+          将 <span class="hl">战术深度</span>、<span class="hl">团队协作</span> 与
+          <span class="hl">个人枪法</span> 完美融合，构建起独一无二的竞技体验。
+        </p>
+        <p>
+          2023 年 9 月，游戏以 <span class="hl">CS2</span> 的全新形态免费升级，
+          搭载起源2引擎、动态烟雾系统，延续传奇。
+        </p>
+
+        <div class="faction-cards">
+          <div class="faction">
+            <div class="fi">🛡️</div>
+            <div class="ft">CT 反恐精英</div>
+            <div class="fd">保护炸弹点、拆除炸弹，守护平民安全</div>
+          </div>
+          <div class="faction">
+            <div class="fi">💥</div>
+            <div class="ft">T 恐怖分子</div>
+            <div class="fd">植入并引爆炸弹，或消灭全部 CT 成员</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modes-grid reveal-right">
+        <div class="mode-card">
+          <div class="mode-icon"><i class="fa fa-trophy"></i></div>
+          <div class="mode-info">
+            <div class="mt">竞技模式</div>
+            <div class="md">5v5 经典对抗，先赢 16 局胜出，30 局制，考验团队战术</div>
+          </div>
+        </div>
+        <div class="mode-card">
+          <div class="mode-icon"><i class="fa fa-users"></i></div>
+          <div class="mode-info">
+            <div class="mt">休闲模式</div>
+            <div class="md">无排名压力，轻松体验 CS 经典玩法，新手友好</div>
+          </div>
+        </div>
+        <div class="mode-card">
+          <div class="mode-icon"><i class="fa fa-bomb"></i></div>
+          <div class="mode-info">
+            <div class="mt">爆破模式</div>
+            <div class="md">CT vs T 经典爆破对抗，Dust2 传奇地图永不过时</div>
+          </div>
+        </div>
+        <div class="mode-card">
+          <div class="mode-icon"><i class="fa fa-gun"></i></div>
+          <div class="mode-info">
+            <div class="mt">军备竞赛</div>
+            <div class="md">每次击杀升级武器，最终用刀击杀完成晋级</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════ FEATURES ══════════ -->
+<section id="features">
+  <div class="container">
+    <div class="features-header">
+      <div class="section-tag">// CORE FEATURES</div>
+      <h2 class="section-title">游戏<span>核心特色</span></h2>
+      <p class="section-desc">27年硬核基因，凝练成六大特色</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feat-card reveal" style="transition-delay:.05s">
+        <div class="feat-icon"><i class="fa fa-chess"></i></div>
+        <div class="feat-title">战术竞技</div>
+        <div class="feat-desc">5v5 团队对抗，每一场都是战术与个人枪法的极限碰撞。无线索、无小地图辅助，纯粹的战场直觉。</div>
+        <div class="feat-corner">FEATURE_01</div>
+      </div>
+      <div class="feat-card reveal" style="transition-delay:.1s">
+        <div class="feat-icon"><i class="fa fa-coins"></i></div>
+        <div class="feat-title">经济系统</div>
+        <div class="feat-desc">每回合使用奖励金钱购买武器、道具与防具，精准的经济决策往往比枪法更能左右胜负。</div>
+        <div class="feat-corner">FEATURE_02</div>
+      </div>
+      <div class="feat-card reveal" style="transition-delay:.15s">
+        <div class="feat-icon"><i class="fa fa-map"></i></div>
+        <div class="feat-title">经典地图</div>
+        <div class="feat-desc">Dust2、Inferno、Mirage、Nuke……每张地图都有二十余年的战术积淀，承载无数经典时刻。</div>
+        <div class="feat-corner">FEATURE_03</div>
+      </div>
+      <div class="feat-card reveal" style="transition-delay:.2s">
+        <div class="feat-icon"><i class="fa fa-palette"></i></div>
+        <div class="feat-title">皮肤系统</div>
+        <div class="feat-desc">数千种武器皮肤、印花与手套，每一件都是独特的战场印记。稀有皮肤早已成为文化符号。</div>
+        <div class="feat-corner">FEATURE_04</div>
+      </div>
+      <div class="feat-card reveal" style="transition-delay:.25s">
+        <div class="feat-icon"><i class="fa fa-signal"></i></div>
+        <div class="feat-title">竞技匹配</div>
+        <div class="feat-desc">基于综合表现的 ELO/评分系统，将实力接近的玩家精准配对，18个段位从白银到全球精英。</div>
+        <div class="feat-corner">FEATURE_05</div>
+      </div>
+      <div class="feat-card reveal" style="transition-delay:.3s">
+        <div class="feat-icon"><i class="fa fa-star"></i></div>
+        <div class="feat-title">Major 电竞</div>
+        <div class="feat-desc">Valve 赞助的 Major 锦标赛，是全球电竞赛事的最高舞台，每届吸引数百万观众在线观看。</div>
+        <div class="feat-corner">FEATURE_06</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════ TIMELINE ══════════ -->
+<section id="timeline">
+  <div class="container">
+    <div class="timeline-header">
+      <div class="section-tag">// 27 YEARS HISTORY</div>
+      <h2 class="section-title"><span>27年</span>传奇历程</h2>
+      <p class="section-desc" style="margin:0 auto; text-align:center">从半条命 MOD 到全球顶级电竞赛事，见证传奇的诞生与进化</p>
+    </div>
+
+    <div class="timeline-wrap">
+      <div class="timeline-line"></div>
+
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-year">1999</div>
+        <div class="tl-title">CS Beta 1.0 诞生</div>
+        <div class="tl-desc">1999年6月19日，Counter-Strike Beta 1.0 以《半条命》免费 MOD 形式问世，由 Minh "Gooseman" Le 与 Jess Cliffe 共同开发。</div>
+        <div class="tl-badge">ORIGIN</div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2000</div>
+        <div class="tl-title">Valve 正式发行</div>
+        <div class="tl-desc">Valve 收购并发行 Counter-Strike 独立正式版，游戏迅速在全球网吧与局域网赛事中风靡，开创了电竞战术射击先河。</div>
+        <div class="tl-badge">RELEASE</div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2002</div>
+        <div class="tl-title">CS 1.5 经典里程碑</div>
+        <div class="tl-desc">CS 1.5 成为公认的经典版本，奠定了爆破模式、武器机制与地图设计的核心框架，影响延续至今。</div>
+        <div class="tl-badge">MILESTONE</div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2003</div>
+        <div class="tl-title">CS 1.6 登陆 Steam</div>
+        <div class="tl-desc">CS 1.6 上线 Steam 平台，竞技机制全面完善，全球职业联赛体系初步建立，风靡全球网吧市场。</div>
+        <div class="tl-badge">GLOBAL EXPANSION</div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2004</div>
+        <div class="tl-title">CS: Source 发布</div>
+        <div class="tl-desc">基于起源引擎重制的 CS: Source 发布，带来全面提升的画面质量与物理效果，开创高清时代。</div>
+        <div class="tl-badge">NEW ERA</div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2005</div>
+        <div class="tl-title">中国荣耀 wNv 夺冠</div>
+        <div class="tl-desc">中国战队 wNv（World eXcellence Virtu）在世界锦标赛上夺冠，开创中国 CS 电竞的黄金时代，成为中国玩家最骄傲的时刻。</div>
+        <div class="tl-badge">🇨🇳 CHINA GLORY</div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2012</div>
+        <div class="tl-title">CS:GO 正式推出</div>
+        <div class="tl-desc">《反恐精英：全球攻势》于2012年8月正式发布，带来匹配系统、武器皮肤、全新枪械手感，系列迈入全新高度。</div>
+        <div class="tl-badge">CS:GO LAUNCH</div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2013</div>
+        <div class="tl-title">首届 Major 锦标赛</div>
+        <div class="tl-desc">EMS One Katowice 2014 作为首届 Valve 赞助 Major 举行，$250,000 奖金池，CS:GO 职业电竞生态正式确立。</div>
+        <div class="tl-badge">ESPORTS ERA</div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2023</div>
+        <div class="tl-title">CS2 全面升级</div>
+        <div class="tl-desc">2023年9月，CS:GO 正式升级为 CS2，起源2引擎带来动态烟雾系统、全面重制的音效与画面，对所有玩家免费开放。</div>
+        <div class="tl-badge">CS2 REVOLUTION</div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2026</div>
+        <div class="tl-title">27周年 — 传奇仍在续写</div>
+        <div class="tl-desc">CS 系列迎来 27 周年，全球每日数百万玩家同时在线，赛事奖金突破 2.51 亿美元，传奇历程仍在继续。</div>
+        <div class="tl-badge">27TH ANNIVERSARY</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════ ESPORTS ══════════ -->
+<section id="esports">
+  <div class="container">
+    <div class="section-tag">// ESPORTS LEGACY</div>
+    <h2 class="section-title">电竞<span>传奇</span></h2>
+    <p class="section-desc">从地下网吧到万人体育场，CS 电竞改变了世界</p>
+
+    <div class="esports-grid">
+      <div class="esports-left reveal-left">
+        <p style="color:var(--muted); font-size:1.05rem; line-height:1.8; margin-bottom:1.5rem; text-indent:2em;">
+          Counter-Strike 不仅是游戏，更是全球 <strong style="color:var(--white)">电子竞技文化</strong> 的奠基石。
+          自2000年代初期的地下网吧赛事到如今的超级 Major，CS 构建了世界上最完整的电竞生态系统之一。
+        </p>
+        <p style="color:var(--muted); font-size:1.05rem; line-height:1.8; text-indent:2em;">
+          每届 Major 锦标赛的现场观众超过 <strong style="color:var(--orange)">15,000 人</strong>，
+          在线观看峰值突破 <strong style="color:var(--orange)">百万</strong>，
+          赛事影响力跨越语言与国界。
+        </p>
+
+        <div class="esports-stats-row">
+          <div class="esport-stat">
+            <div class="sv">19K<span style="font-size:.9rem;color:var(--gold)">+</span></div>
+            <div class="sl">全球锦标赛场次</div>
+          </div>
+          <div class="esport-stat">
+            <div class="sv">$251M</div>
+            <div class="sl">历届总奖金</div>
+          </div>
+          <div class="esport-stat">
+            <div class="sv">27</div>
+            <div class="sl">年持续活跃</div>
+          </div>
+          <div class="esport-stat">
+            <div class="sv">5</div>
+            <div class="sl">官方主要版本</div>
+          </div>
+        </div>
+
+        <div class="china-glory reveal">
+          <div class="cg-icon">🏆</div>
+          <div>
+            <div class="cg-title">中国荣耀 · wNv 战队</div>
+            <div class="cg-desc">2005年，中国战队 wNv 在国际赛事中勇夺冠军，成为中国 CS 历史上最荣耀的时刻，激励了整整一代中国 CSer。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="esports-right reveal-right">
+        <div class="legends-title">传奇选手</div>
+        <div class="legend-list">
+          <div class="legend-card">
+            <div class="legend-avatar">f0</div>
+            <div class="legend-info">
+              <div class="ln">f0rest</div>
+              <div class="lr">瑞典 · NiP战队 · CS 1.6 / CS:GO 双栖传奇</div>
+              <div class="lq">"天生的直觉，从未见过如此天才的选手"</div>
+            </div>
+          </div>
+          <div class="legend-card">
+            <div class="legend-avatar">NE</div>
+            <div class="legend-info">
+              <div class="ln">NEO</div>
+              <div class="lr">波兰 · Virtus.pro · CS 1.6 时代最伟大战术大脑</div>
+              <div class="lq">"用战术杀死敌人，而非子弹"</div>
+            </div>
+          </div>
+          <div class="legend-card">
+            <div class="legend-avatar">s1</div>
+            <div class="legend-info">
+              <div class="ln">s1mple</div>
+              <div class="lr">乌克兰 · NAVI · 全球公认最强选手</div>
+              <div class="lq">"我不打CS，我就是CS"</div>
+            </div>
+          </div>
+          <div class="legend-card">
+            <div class="legend-avatar">FA</div>
+            <div class="legend-info">
+              <div class="ln">FalleN</div>
+              <div class="lr">巴西 · SK Gaming / Liquid · 南美 CS 教父</div>
+              <div class="lq">"让全世界看见巴西 CS 的荣耀"</div>
+            </div>
+          </div>
+          <div class="legend-card">
+            <div class="legend-avatar">KA</div>
+            <div class="legend-info">
+              <div class="ln">karrigan</div>
+              <div class="lr">丹麦 · FaZe Clan · 顶级战术指挥官</div>
+              <div class="lq">"永远相信团队，永远追求胜利"</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════ STATS ══════════ -->
+<section id="stats">
+  <div class="container">
+    <div class="stats-header">
+      <div class="section-tag">// BY THE NUMBERS</div>
+      <h2 class="section-title">数字里的<span>传奇</span></h2>
+      <p class="section-desc" style="margin:0 auto; text-align:center">这些数字，记录了27年的荣耀与热爱</p>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card reveal" style="transition-delay:.05s">
+        <div class="stat-number" data-target="27" data-suffix="">
+          <span class="num">0</span>
+        </div>
+        <div class="stat-label">年持续运营</div>
+        <div class="stat-sub">1999 – 2026</div>
+      </div>
+      <div class="stat-card reveal" style="transition-delay:.1s">
+        <div class="stat-number" data-target="5" data-suffix="">
+          <span class="num">0</span>
+        </div>
+        <div class="stat-label">官方主要版本</div>
+        <div class="stat-sub">CS · 1.6 · CS:S · CS:GO · CS2</div>
+      </div>
+      <div class="stat-card reveal" style="transition-delay:.15s">
+        <div class="stat-number" data-target="19000" data-suffix="+">
+          <span class="num">0</span><span class="suffix">+</span>
+        </div>
+        <div class="stat-label">全球锦标赛场次</div>
+        <div class="stat-sub">覆盖全球 60+ 国家与地区</div>
+      </div>
+      <div class="stat-card reveal" style="transition-delay:.2s">
+        <div class="stat-number" data-target="251" data-suffix="M+">
+          $<span class="num">0</span><span class="suffix">M+</span>
+        </div>
+        <div class="stat-label">历届赛事总奖金</div>
+        <div class="stat-sub">2.51 亿美元</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="fb-logo"><span>CS</span>:GO · Fan Page</div>
+        <p>这是一个由 CSer 制作、献给 CSer 的非官方主题页面。<br>致敬二十七年来，每一个倒计时、每一声枪响、每一次胜利欢呼背后的你。</p>
+        <div class="fb-tagline">致敬所有 CSer · 传奇不会落幕</div>
+      </div>
+      <div class="footer-col">
+        <h4>页面导航</h4>
+        <ul>
+          <li><a href="#intro">游戏简介</a></li>
+          <li><a href="#features">核心特色</a></li>
+          <li><a href="#timeline">27年历史</a></li>
+          <li><a href="#esports">电竞传奇</a></li>
+          <li><a href="#stats">数据统计</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>官方链接</h4>
+        <ul>
+          <li><a href="https://www.counter-strike.net" target="_blank" rel="noopener">CS 官网</a></li>
+          <li><a href="https://store.steampowered.com/app/730" target="_blank" rel="noopener">Steam 页面</a></li>
+          <li><a href="https://liquipedia.net/counterstrike" target="_blank" rel="noopener">Liquipedia CS</a></li>
+          <li><a href="https://www.hltv.org" target="_blank" rel="noopener">HLTV 赛事</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-copy">
+        &copy; 2026 Counter-Strike Fan Page &nbsp;·&nbsp;
+        Non-official page. Counter-Strike is a trademark of <a href="https://www.valvesoftware.com" target="_blank" rel="noopener">Valve Corporation</a>.
+      </div>
+      <div class="footer-tribute">🎯 For The Love of CS — 1999 &middot; 2026</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════ SCRIPTS ══════════ -->
+<script>
+  /* ─ Navbar scroll ─ */
+  const navbar = document.getElementById('navbar');
+  const progressBar = document.getElementById('progress-bar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+    const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+    progressBar.style.width = pct + '%';
+  }, { passive: true });
+
+  /* ─ Mobile nav ─ */
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('mobileMenu').classList.add('open');
+  });
+  document.getElementById('mobileClose').addEventListener('click', closeMobile);
+  function closeMobile() {
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+
+  /* ─ Hero Canvas Particles ─ */
+  (function() {
+    const canvas = document.getElementById('canvas-hero');
+    const ctx = canvas.getContext('2d');
+    let W, H, particles = [], animId;
+
+    function resize() {
+      W = canvas.width  = canvas.offsetWidth;
+      H = canvas.height = canvas.offsetHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    class Particle {
+      constructor() { this.reset(); }
+      reset() {
+        this.x  = Math.random() * W;
+        this.y  = Math.random() * H;
+        this.vx = (Math.random() - .5) * .4;
+        this.vy = (Math.random() - .5) * .4;
+        this.r  = Math.random() * 1.2 + .2;
+        this.a  = Math.random() * .35 + .05;
+        this.c  = Math.random() < .4 ? '#d45d00' : Math.random() < .5 ? '#9a7a2e' : '#333333';
+      }
+      update() {
+        this.x += this.vx; this.y += this.vy;
+        if (this.x < 0 || this.x > W || this.y < 0 || this.y > H) this.reset();
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+        ctx.fillStyle = this.c;
+        ctx.globalAlpha = this.a;
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < 120; i++) particles.push(new Particle());
+
+    /* Draw crosshair center decoration */
+    function drawCrosshairs() {
+      const cx = W / 2, cy = H / 2;
+      ctx.globalAlpha = .12;
+      ctx.strokeStyle = '#d45d00';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.arc(cx, cy, 80, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(cx, cy, 4, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(cx - 100, cy); ctx.lineTo(cx - 90, cy);
+      ctx.moveTo(cx + 90, cy);  ctx.lineTo(cx + 100, cy);
+      ctx.moveTo(cx, cy - 100); ctx.lineTo(cx, cy - 90);
+      ctx.moveTo(cx, cy + 90);  ctx.lineTo(cx, cy + 100);
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+    }
+
+    /* Connect nearby particles */
+    function connectParticles() {
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const d = Math.sqrt(dx*dx + dy*dy);
+          if (d < 80) {
+            ctx.globalAlpha = (1 - d/80) * .08;
+            ctx.strokeStyle = '#d45d00';
+            ctx.lineWidth = .5;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, W, H);
+      drawCrosshairs();
+      connectParticles();
+      particles.forEach(p => { p.update(); p.draw(); });
+      ctx.globalAlpha = 1;
+      animId = requestAnimationFrame(animate);
+    }
+    animate();
+  })();
+
+  /* ─ Scroll reveal ─ */
+  const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 40);
+        revealObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: .12 });
+  revealEls.forEach(el => revealObserver.observe(el));
+
+  /* ─ Counter animation ─ */
+  function animateCounter(el) {
+    const wrapper = el.querySelector('.stat-number');
+    if (!wrapper) return;
+    const target  = parseInt(wrapper.dataset.target);
+    const numEl   = wrapper.querySelector('.num');
+    let current = 0;
+    const step  = Math.max(1, Math.floor(target / 50));
+    const timer = setInterval(() => {
+      current = Math.min(current + step, target);
+      numEl.textContent = current >= 1000
+        ? (current / 1000).toFixed(0) + 'K'
+        : current;
+      if (current >= target) clearInterval(timer);
+    }, 28);
+  }
+
+  const statCards = document.querySelectorAll('.stat-card');
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        animateCounter(e.target);
+        counterObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: .3 });
+  statCards.forEach(c => counterObserver.observe(c));
+
+  /* ─ Custom crosshair follow ─ */
+  const ch = document.getElementById('crosshair');
+  document.addEventListener('mousemove', e => {
+    ch.style.left = (e.clientX - 10) + 'px';
+    ch.style.top  = (e.clientY - 10) + 'px';
+    ch.style.opacity = '.7';
+  });
+  document.addEventListener('mouseleave', () => ch.style.opacity = '0');
+
+  /* ─ Smooth active nav ─ */
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 200) cur = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + cur
+        ? 'var(--orange)'
+        : '';
+    });
+  }, { passive: true });
+</script>
+</body>
+</html>
